@@ -20,4 +20,8 @@ export class ApiTheMoviesDBService {
   DetallePelicula(idString:String){
     return this.httpClient.get('https://api.themoviedb.org/3/movie/' + idString + '?api_key=' + this.ApiKey  + '&language=es-ES');
   }
+
+  ConsultarAutor(nombreAutor:String){
+    return this.httpClient.get('https://api.themoviedb.org/3/search/person?api_key=' + this.ApiKey + '&language=es-ES&query=' + nombreAutor + '&page=1&include_adult=true')
+  }
 }

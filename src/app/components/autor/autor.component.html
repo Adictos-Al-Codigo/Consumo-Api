@@ -1,0 +1,21 @@
+<form class="d-flex" role="search">
+    <input value="Mr Bean" class="form-control me-2" #data type="search" placeholder="Mr Bean" aria-label="Search">
+    <button class="btn btn-outline-success" (click)="ConsultarAutor(data.value)" type="button">Buscar</button>
+</form>
+
+<div class="container text-center">
+    <div class="row row-cols-3">
+      <div *ngFor="let autor of DataAutor" >
+        <div class="card" style="width: 15rem;" >
+          <img src="http://image.tmdb.org/t/p/w500/{{autor.profile_path}}" class="card-img-top" alt="{{autor.name}}">
+          <div class="card-body">
+            <h5 class="card-title">{{autor.name}}</h5>
+          </div>
+          <p class="text_idiomas">🌟 Peliculas  🌟</p>
+          <ul *ngFor="let peliculas of autor.known_for">
+            <li>{{peliculas.title}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
