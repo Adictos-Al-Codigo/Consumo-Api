@@ -9,6 +9,7 @@ import { ApiTheMoviesDBService } from './services/api-the-movies-db.service';
 export class AppComponent {
 
   Lista_Peliculas:any;
+  InfoPelicula:any;
 
   constructor(private apiTheMoviesDBService:ApiTheMoviesDBService){
     this.Lista_Peliculas = null;
@@ -27,6 +28,19 @@ export class AppComponent {
     this.apiTheMoviesDBService.ObtenerPeliculasPorNombre(newData).subscribe({
       next: (s:any) =>{
         this.Lista_Peliculas = s.results;
+      },
+      error: (err) =>{
+        console.error(err);
+      }
+    })
+  }
+
+  DetallePelicula(idPelicula:number){
+    let idPeliculaS = idPelicula.toString();
+
+    this.apiTheMoviesDBService.DetallePelicula(idPeliculaS).subscribe({
+      next: (s) =>{
+        this.InfoPelicula = s;
       },
       error: (err) =>{
         console.error(err);

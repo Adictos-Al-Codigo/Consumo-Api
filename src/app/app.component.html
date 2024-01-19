@@ -6,8 +6,8 @@
 
 <div class="container text-center">
   <div class="row row-cols-3">
-    <div *ngFor="let peliculas of Lista_Peliculas">
-      <div class="card" style="width: 15rem;" >
+    <div *ngFor="let peliculas of Lista_Peliculas" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <div (click)="DetallePelicula(peliculas.id)" class="card" style="width: 15rem;" >
         <img src="http://image.tmdb.org/t/p/w500/{{peliculas.poster_path}}" class="card-img-top" alt="{{peliculas.title}}">
         <div class="card-body">
           <h5 class="card-title">{{peliculas.title}}</h5>
@@ -18,9 +18,27 @@
   </div>
 </div>
 
-<div class="container text-center">
-  <div class="row">
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{InfoPelicula.title}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <img height="250px" width="250px" src="http://image.tmdb.org/t/p/w500/{{InfoPelicula.belongs_to_collection.poster_path}}" class="img-pelicula" alt="{{InfoPelicula.title}}">
+      <div class="modal-body">
+        {{InfoPelicula.overview}}
+      </div>
+      <h4>Idiomas: </h4>
+      <p class="text_idiomas" *ngFor="let idiomas of InfoPelicula.spoken_languages">
+        {{idiomas.english_name}}
+      </p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
   </div>
 </div>
 
