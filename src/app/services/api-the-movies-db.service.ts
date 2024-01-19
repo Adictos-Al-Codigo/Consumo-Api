@@ -13,8 +13,8 @@ export class ApiTheMoviesDBService {
 
   }
 
-  ObtenerPeliculasPorNombre(Data:String){
-    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?api_key=' + this.ApiKey + '&language=es-ES&query=' + Data + '&page=1&include_adult=true');
+  ObtenerPeliculasPorNombre(Data:String, page:number){
+    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?api_key=' + this.ApiKey + '&language=es-ES&query=' + Data + '&page=' +  page + '&include_adult=true');
   }
 
   DetallePelicula(idString:String){

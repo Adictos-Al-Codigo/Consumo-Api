@@ -11,6 +11,24 @@ import { ApiTheMoviesDBService } from 'src/app/services/api-the-movies-db.servic
 export class PeliculasComponent {
   Lista_Peliculas:any;
   InfoPelicula:any;
+  public page: number = 1;
+  Paginacion: number = 1;
+  public newData!:string;
+  public newPaginacion!:number;
+
+  setPaginacion():void{
+    this.Paginacion +=  1;
+    this.ObtenerPeliculasPorNombre(this.newData);
+  }
+
+  atrasPaginacion():void{
+    if(this.Paginacion==1){
+      this.Paginacion = 1;
+    }else{
+      this.Paginacion -= 1;
+          this.ObtenerPeliculasPorNombre(this.newData);
+    }
+  }
 
   constructor(private apiTheMoviesDBService:ApiTheMoviesDBService){
     this.Lista_Peliculas = null;
@@ -18,17 +36,17 @@ export class PeliculasComponent {
 
 
   ObtenerPeliculasPorNombre(data:any){
-    let newData;
 
     if(data == "Doraemon"){
-       newData = 'Doraemon';
+      this.newData = 'Doraemon';
     }else{
-      newData = data.value;
+      this.newData = data.value;
     }
 
-    this.apiTheMoviesDBService.ObtenerPeliculasPorNombre(newData).subscribe({
+    this.apiTheMoviesDBService.ObtenerPeliculasPorNombre(this.newData,this.Paginacion).subscribe({
       next: (s:any) =>{
         this.Lista_Peliculas = s.results;
+        this.newPaginacion = s.total_pages;
       },
       error: (err) =>{
         console.error(err);

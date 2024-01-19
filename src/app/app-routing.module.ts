@@ -5,6 +5,10 @@ import { PeliculasComponent } from './components/peliculas/peliculas.component';
 
 const routes: Routes = [
   {
+    path: "",
+    component: PeliculasComponent
+  },
+  {
     path: "Autor",
     component: AutorComponent
   },
